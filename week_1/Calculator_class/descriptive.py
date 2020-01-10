@@ -13,6 +13,7 @@ class Calculator():
     def __init__(self, data):
         self.data = data
         
+        
 #     def reset(self):
 #         self.__init__(self.data)
     @property
@@ -36,11 +37,11 @@ class Calculator():
             
     @property
     def variance(self):
-        return sum(((x - self.mean)**2) for x in self.data) / (len(self.data))
+        return sum(((x - self.mean)**2) for x in self.data) / (len(self.data)-1)
     
     @property
     def stand_dev(self):
-        return (sum(((x - self.mean)**2) for x in self.data) / (len(self.data)))**.5
+        return (sum(((x - self.mean)**2) for x in self.data) / (len(self.data)-1))**.5
          
         
     def add_data(self, more_data):
@@ -49,9 +50,12 @@ class Calculator():
             self.reset()
         else:
             return self.data.append(more_data)
-            self.reset()
+
         
     def remove_data(self, item):
-        return self.data.remove(item)
+        for element in item:
+            if element in self.data:
+                self.data.remove(element)
+        
     
     
